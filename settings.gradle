@@ -1,7 +1,0 @@
-rootProject.name='governator'
-include 'governator-core'
-include 'governator-servlet'
-include 'governator-commons-cli'
-include 'governator-test-junit'
-include 'governator-archaius'
-project(':governator-core').name = 'governator'

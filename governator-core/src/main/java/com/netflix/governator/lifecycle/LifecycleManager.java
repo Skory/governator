@@ -16,32 +16,8 @@
 
 package com.netflix.governator.lifecycle;
 
-import java.io.Closeable;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicReference;
-
-import javax.annotation.PreDestroy;
-import javax.validation.ConstraintViolation;
-import javax.validation.Path;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.google.common.base.Function;
-import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
@@ -52,6 +28,15 @@ import com.netflix.governator.guice.LifecycleAnnotationProcessor;
 import com.netflix.governator.lifecycle.warmup.DAGManager;
 import com.netflix.governator.lifecycle.warmup.WarmUpDriver;
 import com.netflix.governator.lifecycle.warmup.WarmUpSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.annotation.PreDestroy;
+import java.io.Closeable;
+import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Main instance management container
@@ -65,7 +50,6 @@ public class LifecycleManager implements Closeable
     private final AtomicReference<State> state = new AtomicReference<State>(State.LATENT);
     private final ConfigurationDocumentation configurationDocumentation;
     private final Collection<LifecycleListener> listeners;
-    private final ValidatorFactory factory;
     private final DAGManager dagManager = new DAGManager();
     private final PostStartArguments postStartArguments;
     private final AtomicReference<WarmUpSession> postStartWarmUpSession = new AtomicReference<WarmUpSession>(null);
@@ -78,7 +62,6 @@ public class LifecycleManager implements Closeable
     {
         this.methodsFactory = methodsFactory;
         listeners = ImmutableSet.copyOf(arguments.getLifecycleListeners());
-        factory = Validation.buildDefaultValidatorFactory();
         postStartArguments = arguments.getPostStartArguments();
         configurationDocumentation = arguments.getConfigurationDocumentation();
         
@@ -152,8 +135,6 @@ public class LifecycleManager implements Closeable
 
         if ( hasStarted() )
         {
-            validate(obj);
-
             postStartWarmUpSession.compareAndSet(null, new WarmUpSession(getWarmUpDriver(), dagManager));
             WarmUpSession session = postStartWarmUpSession.get();
             session.doInBackground();
@@ -210,8 +191,6 @@ public class LifecycleManager implements Closeable
     {
         Preconditions.checkState(state.compareAndSet(State.LATENT, State.STARTING), "Already started");
 
-        validate();
-
         long maxMs = (unit != null) ? unit.toMillis(maxWait) : Long.MAX_VALUE;
         WarmUpSession warmUpSession = new WarmUpSession(getWarmUpDriver(), dagManager);
         boolean success = warmUpSession.doImmediate(maxMs);
@@ -245,44 +224,6 @@ public class LifecycleManager implements Closeable
     }
 
     /**
-     * Run the validations on the managed objects. This is done automatically when {@link #start()} is called.
-     * But you can call this at any time you need.
-     *
-     * @throws ValidationException
-     */
-    public void validate() throws ValidationException
-    {
-        ValidationException exception = null;
-        Validator validator = factory.getValidator();
-        for ( StateKey key : objectStates.keySet() )
-        {
-            Object obj = key.obj;
-            exception = internalValidateObject(exception, obj, validator);
-        }
-
-        if ( exception != null )
-        {
-            throw exception;
-        }
-    }
-
-    /**
-     * Run validations on the given object
-     *
-     * @param obj the object to validate
-     * @throws ValidationException
-     */
-    public void validate(Object obj) throws ValidationException
-    {
-        Validator validator = factory.getValidator();
-        ValidationException exception = internalValidateObject(null, obj, validator);
-        if ( exception != null )
-        {
-            throw exception;
-        }
-    }
-
-    /**
      * @return the internal DAG manager
      */
     public DAGManager getDAGManager()
@@ -305,25 +246,6 @@ public class LifecycleManager implements Closeable
         }
     }
 
-    private ValidationException internalValidateObject(ValidationException exception, Object obj, Validator validator)
-    {
-        Set<ConstraintViolation<Object>> violations = validator.validate(obj);
-        for ( ConstraintViolation<Object> violation : violations )
-        {
-            String path = getPath(violation);
-            String message = String.format("%s - %s.%s = %s", violation.getMessage(), obj.getClass().getName(), path, String.valueOf(violation.getInvalidValue()));
-            if ( exception == null )
-            {
-                exception = new ValidationException(message);
-            }
-            else
-            {
-                exception = new ValidationException(message, exception);
-            }
-        }
-        return exception;
-    }
-
     private void stopInstances() throws Exception
     {
         for ( PreDestroyRecord record : getReversed(preDestroys) )
@@ -339,23 +261,6 @@ public class LifecycleManager implements Closeable
         List<PreDestroyRecord> reversed = Lists.newArrayList(records);
         Collections.reverse(reversed);
         return reversed;
-    }
-
-    private String getPath(ConstraintViolation<Object> violation)
-    {
-        Iterable<String> transformed = Iterables.transform
-            (
-                violation.getPropertyPath(),
-                new Function<Path.Node, String>()
-                {
-                    @Override
-                    public String apply(Path.Node node)
-                    {
-                        return node.getName();
-                    }
-                }
-            );
-        return Joiner.on(".").join(transformed);
     }
 
     private WarmUpDriver getWarmUpDriver()

@@ -1,20 +1,16 @@
 package com.netflix.governator.autobind.scopes;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
-import junit.framework.Assert;
-
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
-
 import com.google.inject.Injector;
 import com.google.inject.Stage;
 import com.netflix.governator.annotations.AutoBindSingleton;
 import com.netflix.governator.guice.LifecycleInjector;
 import com.netflix.governator.guice.LifecycleInjectorMode;
 import com.netflix.governator.guice.lazy.LazySingleton;
+import junit.framework.Assert;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class TestAutoBindSingletonScopes {
 	@AutoBindSingleton

@@ -1,18 +1,8 @@
 package com.netflix.governator.guice.serviceloader;
 
-import java.util.List;
-import java.util.ServiceLoader;
-import java.util.Set;
-import java.util.concurrent.Callable;
-
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import com.google.inject.AbstractModule;
-import com.google.inject.Inject;
-import com.google.inject.Injector;
-import com.google.inject.ProvisionException;
-import com.google.inject.Scopes;
-import com.google.inject.TypeLiteral;
+import com.google.inject.*;
 import com.google.inject.multibindings.Multibinder;
 import com.google.inject.spi.BindingTargetVisitor;
 import com.google.inject.spi.ProviderInstanceBinding;
@@ -20,6 +10,11 @@ import com.google.inject.spi.ProviderWithExtensionVisitor;
 import com.google.inject.spi.Toolable;
 import com.google.inject.util.Types;
 import com.netflix.governator.guice.lazy.LazySingletonScope;
+
+import java.util.List;
+import java.util.ServiceLoader;
+import java.util.Set;
+import java.util.concurrent.Callable;
 
 /**
  * Simple Guice module to integrate with the {@link ServiceLoader}.

@@ -1,13 +1,5 @@
 package com.netflix.governator.guice.serviceloader;
 
-import java.util.Set;
-
-import javax.inject.Inject;
-
-import junit.framework.Assert;
-
-import org.testng.annotations.Test;
-
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Key;
@@ -16,6 +8,11 @@ import com.google.inject.name.Names;
 import com.google.inject.util.Types;
 import com.netflix.governator.guice.LifecycleInjector;
 import com.netflix.governator.guice.LifecycleInjectorBuilder;
+import junit.framework.Assert;
+import org.testng.annotations.Test;
+
+import javax.inject.Inject;
+import java.util.Set;
 
 public class ServiceLoaderTest {
     public static class BoundServiceImpl implements TestService {

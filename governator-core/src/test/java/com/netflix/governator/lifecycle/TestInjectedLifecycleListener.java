@@ -16,11 +16,6 @@
 
 package com.netflix.governator.lifecycle;
 
-import java.util.Collection;
-
-import org.testng.Assert;
-import org.testng.annotations.Test;
-
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.TypeLiteral;
@@ -28,6 +23,10 @@ import com.netflix.governator.LifecycleInjectorBuilderProvider;
 import com.netflix.governator.guice.BootstrapBinder;
 import com.netflix.governator.guice.BootstrapModule;
 import com.netflix.governator.guice.LifecycleInjectorBuilder;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+import java.util.Collection;
 
 public class TestInjectedLifecycleListener extends LifecycleInjectorBuilderProvider
 {
@@ -88,7 +87,7 @@ public class TestInjectedLifecycleListener extends LifecycleInjectorBuilderProvi
             )
             .createInjector();
 
-        LifecycleManager                manager = injector.getInstance(LifecycleManager.class);
+        LifecycleManager manager = injector.getInstance(LifecycleManager.class);
         Collection<LifecycleListener>   listeners = manager.getListeners();
         Assert.assertEquals(listeners.size(), 1);
         Assert.assertTrue(listeners.iterator().next() instanceof MyListener);

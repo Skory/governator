@@ -6,14 +6,7 @@
 package com.netflix.external.governator.guice.modules;
 
 import com.google.common.collect.Lists;
-import com.google.inject.AbstractModule;
-import com.google.inject.Inject;
-import com.google.inject.Injector;
-import com.google.inject.Key;
-import com.google.inject.Module;
-import com.google.inject.Singleton;
-import com.google.inject.Stage;
-import com.google.inject.TypeLiteral;
+import com.google.inject.*;
 import com.netflix.governator.LifecycleInjectorBuilderProvider;
 import com.netflix.governator.guice.BootstrapBinder;
 import com.netflix.governator.guice.BootstrapModule;
@@ -23,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
+
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -225,7 +219,7 @@ public class ModuleDepdenciesTest extends LifecycleInjectorBuilderProvider
     }
     
     @Test(dataProvider = "builders") 
-    public void confirmMultiWithModuleClasses(LifecycleInjectorBuilder lifecycleInjectorBuilder) 
+    public void confirmMultiWithModuleClasses(LifecycleInjectorBuilder lifecycleInjectorBuilder)
     {
         final List<Integer> actual = Lists.newArrayList();
         BootstrapModule bootstrap = new BootstrapModule()

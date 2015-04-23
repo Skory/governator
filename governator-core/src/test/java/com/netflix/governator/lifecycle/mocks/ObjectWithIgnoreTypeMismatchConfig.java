@@ -17,6 +17,7 @@
 package com.netflix.governator.lifecycle.mocks;
 
 import com.netflix.governator.annotations.Configuration;
+
 import java.util.Date;
 
 public class ObjectWithIgnoreTypeMismatchConfig

@@ -1,9 +1,8 @@
 package com.netflix.governator.guice;
 
+import com.google.inject.AbstractModule;
 import org.junit.Rule;
 import org.junit.Test;
-
-import com.google.inject.AbstractModule;
 
 public class Example {
     public static interface Foo {

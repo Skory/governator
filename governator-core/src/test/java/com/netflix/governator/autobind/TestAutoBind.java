@@ -17,21 +17,13 @@
 package com.netflix.governator.autobind;
 
 import com.google.common.collect.Lists;
-import com.google.inject.Binder;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-import com.google.inject.Module;
-import com.google.inject.TypeLiteral;
+import com.google.inject.*;
 import com.netflix.governator.LifecycleInjectorBuilderProvider;
 import com.netflix.governator.annotations.AutoBind;
-import com.netflix.governator.guice.AutoBindProvider;
-import com.netflix.governator.guice.AutoBinds;
-import com.netflix.governator.guice.BootstrapBinder;
-import com.netflix.governator.guice.BootstrapModule;
-import com.netflix.governator.guice.LifecycleInjector;
-import com.netflix.governator.guice.LifecycleInjectorBuilder;
+import com.netflix.governator.guice.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
 import java.util.Collections;
 
 public class TestAutoBind extends LifecycleInjectorBuilderProvider

@@ -18,6 +18,7 @@ package com.netflix.governator.lifecycle.warmup;
 
 import com.google.common.collect.Maps;
 import com.google.inject.Singleton;
+
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;

@@ -249,7 +249,7 @@ public class LifecycleInjector
      * pass the scanner to the builder via {@link LifecycleInjectorBuilder#usingClasspathScanner(ClasspathScanner)}.
      *
      * @param basePackages packages to recursively scan
-     * @param b 
+     * @param b
      * @return scanner
      */
     public static ClasspathScanner createStandardClasspathScanner(Collection<String> basePackages) {
@@ -425,7 +425,7 @@ public class LifecycleInjector
                             
                             // Manually copy bindings from the bootstrap injector to the simulated child injector.
                             Map<Key<?>, Binding<?>> bindings = tempInjector.getAllBindings();
-                            for (java.util.Map.Entry<Key<?>, Binding<?>> binding : bindings.entrySet()) {
+                            for (Map.Entry<Key<?>, Binding<?>> binding : bindings.entrySet()) {
                                 Class<?> cls = binding.getKey().getTypeLiteral().getRawType();
                                 if (   Module.class.isAssignableFrom(cls)
                                     || Injector.class.isAssignableFrom(cls)

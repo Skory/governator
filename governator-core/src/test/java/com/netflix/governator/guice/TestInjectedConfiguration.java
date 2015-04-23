@@ -22,6 +22,7 @@ import com.netflix.governator.configuration.PropertiesConfigurationProvider;
 import com.netflix.governator.guice.mocks.ObjectWithConfig;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
 import java.util.Properties;
 
 public class TestInjectedConfiguration extends LifecycleInjectorBuilderProvider

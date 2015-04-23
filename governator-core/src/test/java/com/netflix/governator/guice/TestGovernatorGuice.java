@@ -16,38 +16,21 @@
 
 package com.netflix.governator.guice;
 
-import java.util.List;
-
-import org.testng.Assert;
-import org.testng.annotations.Test;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.inject.AbstractModule;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-import com.google.inject.Key;
-import com.google.inject.Scopes;
-import com.google.inject.TypeLiteral;
+import com.google.inject.*;
 import com.netflix.governator.LifecycleInjectorBuilderProvider;
-import com.netflix.governator.guice.mocks.ObjectWithGenericInterface;
-import com.netflix.governator.guice.mocks.SimpleContainer;
-import com.netflix.governator.guice.mocks.SimpleEagerSingleton;
-import com.netflix.governator.guice.mocks.SimpleGenericInterface;
-import com.netflix.governator.guice.mocks.SimpleInterface;
-import com.netflix.governator.guice.mocks.SimplePojo;
-import com.netflix.governator.guice.mocks.SimplePojoAlt;
-import com.netflix.governator.guice.mocks.SimpleProvider;
-import com.netflix.governator.guice.mocks.SimpleProviderAlt;
-import com.netflix.governator.guice.mocks.SimpleSingleton;
-import com.netflix.governator.guice.mocks.UnreferencedSingleton;
+import com.netflix.governator.guice.mocks.*;
 import com.netflix.governator.guice.modules.ObjectA;
 import com.netflix.governator.guice.modules.ObjectB;
 import com.netflix.governator.lifecycle.DefaultLifecycleListener;
-import com.netflix.governator.lifecycle.FilteredLifecycleListener;
 import com.netflix.governator.lifecycle.LifecycleListener;
 import com.netflix.governator.lifecycle.LifecycleManager;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+import java.util.List;
 
 public class TestGovernatorGuice extends LifecycleInjectorBuilderProvider
 {
@@ -97,7 +80,7 @@ public class TestGovernatorGuice extends LifecycleInjectorBuilderProvider
     public void     testAutoBindSingletonVsSingleton(LifecycleInjectorBuilder lifecycleInjectorBuilder) throws Exception
     {
         final List<Object>        objects = Lists.newArrayList();
-        final LifecycleListener   listener = new DefaultLifecycleListener() {
+        final LifecycleListener listener = new DefaultLifecycleListener() {
             @Override
             public <T> void objectInjected(TypeLiteral<T> type, T obj) {
                 objects.add(obj);
@@ -174,7 +157,7 @@ public class TestGovernatorGuice extends LifecycleInjectorBuilderProvider
     public void     testSimpleSingleton(LifecycleInjectorBuilder lifecycleInjectorBuilder) throws Exception
     {
         Injector            injector = lifecycleInjectorBuilder.usingBasePackages(PACKAGES).createInjector();
-        LifecycleManager    manager = injector.getInstance(LifecycleManager.class);
+        LifecycleManager manager = injector.getInstance(LifecycleManager.class);
         manager.start();
 
         SimpleSingleton     instance = injector.getInstance(SimpleSingleton.class);
@@ -192,7 +175,7 @@ public class TestGovernatorGuice extends LifecycleInjectorBuilderProvider
     public void     testInjectedIntoAnother(LifecycleInjectorBuilder lifecycleInjectorBuilder) throws Exception
     {
         Injector            injector = lifecycleInjectorBuilder.usingBasePackages(PACKAGES).createInjector();
-        LifecycleManager    manager = injector.getInstance(LifecycleManager.class);
+        LifecycleManager manager = injector.getInstance(LifecycleManager.class);
         manager.start();
 
         SimpleContainer     instance = injector.getInstance(SimpleContainer.class);

@@ -3,11 +3,11 @@ package com.netflix.governator.lifecycle;
 import com.google.inject.Injector;
 import com.netflix.governator.LifecycleInjectorBuilderProvider;
 import com.netflix.governator.annotations.WarmUp;
-import com.netflix.governator.guice.LifecycleInjector;
 import com.netflix.governator.guice.LifecycleInjectorBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
+
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 import javax.inject.Singleton;

@@ -1,12 +1,10 @@
 package com.netflix.governator.guice;
 
-import junit.framework.Assert;
-
-import org.junit.Rule;
-import org.junit.Test;
-
 import com.google.inject.AbstractModule;
 import com.netflix.governator.guice.annotations.GovernatorConfiguration;
+import junit.framework.Assert;
+import org.junit.Rule;
+import org.junit.Test;
 
 public class BootstrapExample {
     public static interface Foo {

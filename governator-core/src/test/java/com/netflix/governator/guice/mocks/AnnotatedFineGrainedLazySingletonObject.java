@@ -17,7 +17,7 @@
 package com.netflix.governator.guice.mocks;
 
 import com.netflix.governator.guice.lazy.FineGrainedLazySingleton;
-import com.netflix.governator.guice.lazy.LazySingleton;
+
 import javax.annotation.PostConstruct;
 import java.util.concurrent.atomic.AtomicInteger;
 

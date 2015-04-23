@@ -3,7 +3,6 @@ package com.netflix.governator.lifecycle.resources;
 import com.google.inject.Injector;
 import com.google.inject.Scopes;
 import com.netflix.governator.LifecycleInjectorBuilderProvider;
-import com.netflix.governator.guice.LifecycleInjector;
 import com.netflix.governator.guice.LifecycleInjectorBuilder;
 import com.netflix.governator.lifecycle.LifecycleManager;
 import org.testng.Assert;

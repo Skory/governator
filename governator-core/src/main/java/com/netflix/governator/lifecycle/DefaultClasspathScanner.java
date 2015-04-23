@@ -16,6 +16,17 @@
 
 package com.netflix.governator.lifecycle;
 
+import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
+import org.apache.xbean.finder.AnnotationFinder;
+import org.apache.xbean.finder.archive.Archive;
+import org.apache.xbean.finder.archive.CompositeArchive;
+import org.apache.xbean.finder.archive.JarArchive;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
@@ -26,18 +37,6 @@ import java.util.Collection;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Set;
-
-import org.apache.xbean.finder.AnnotationFinder;
-import org.apache.xbean.finder.archive.Archive;
-import org.apache.xbean.finder.archive.CompositeArchive;
-import org.apache.xbean.finder.archive.JarArchive;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.google.common.base.Preconditions;
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 
 /**
  * Utility to find annotated classes

@@ -1,16 +1,15 @@
 package com.netflix.governator.guice;
 
-import java.util.Arrays;
-import java.util.List;
-
-import org.junit.Assert;
-import org.junit.rules.ExternalResource;
-
 import com.google.inject.Injector;
 import com.google.inject.Key;
 import com.google.inject.Module;
 import com.google.inject.TypeLiteral;
 import com.netflix.governator.lifecycle.LifecycleManager;
+import org.junit.Assert;
+import org.junit.rules.ExternalResource;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Rule for testing with governator.  The rule provides the following conveniences
@@ -55,11 +54,11 @@ public class LifecycleTester extends ExternalResource {
         this.suites = suites.toArray(new BootstrapModule[suites.size()]);
     }
 
-    public LifecycleTester(BootstrapModule ... suites) {
+    public LifecycleTester(BootstrapModule... suites) {
         this.suites = suites;
     }
     
-    public LifecycleTester(Class bootstrap, BootstrapModule ... suites) {
+    public LifecycleTester(Class bootstrap, BootstrapModule... suites) {
         this.bootstrap = bootstrap;
         this.suites = suites;
     }

@@ -1,11 +1,10 @@
 package com.netflix.governator.guice.transformer;
 
-import org.testng.Assert;
-import org.testng.annotations.Test;
-
 import com.google.inject.AbstractModule;
 import com.google.inject.Injector;
 import com.netflix.governator.guice.LifecycleInjector;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 public class OverrideAllDuplicateBindingsTest {
     public static interface Foo {

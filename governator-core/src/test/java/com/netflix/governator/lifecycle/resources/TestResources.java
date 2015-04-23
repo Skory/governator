@@ -4,11 +4,11 @@ import com.google.inject.Injector;
 import com.netflix.governator.LifecycleInjectorBuilderProvider;
 import com.netflix.governator.guice.BootstrapBinder;
 import com.netflix.governator.guice.BootstrapModule;
-import com.netflix.governator.guice.LifecycleInjector;
 import com.netflix.governator.guice.LifecycleInjectorBuilder;
 import com.netflix.governator.lifecycle.ResourceLocator;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
 import javax.annotation.Resource;
 import java.awt.*;
 import java.math.BigInteger;

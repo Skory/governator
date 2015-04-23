@@ -1,22 +1,19 @@
 package com.netflix.governator.lifecycle;
 
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.inject.Singleton;
-import javax.validation.Constraint;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 import com.netflix.governator.annotations.WarmUp;
 import com.netflix.governator.guice.LifecycleAnnotationProcessor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.inject.Singleton;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.HashSet;
+import java.util.Set;
 
 @Singleton
 public class DefaultLifecycleMethodsFactory implements LifecycleMethodsFactory {
@@ -28,9 +25,9 @@ public class DefaultLifecycleMethodsFactory implements LifecycleMethodsFactory {
     
     @Inject
     public DefaultLifecycleMethodsFactory(LifecycleManagerArguments arguments) {
-        fieldAnnotations  = new HashSet<Class<? extends Annotation>>();
-        methodAnnotations = new HashSet<Class<? extends Annotation>>();
-        classAnnotations  = new HashSet<Class<? extends Annotation>>();
+        fieldAnnotations  = new HashSet<>();
+        methodAnnotations = new HashSet<>();
+        classAnnotations  = new HashSet<>();
         
         for (LifecycleAnnotationProcessor processor : arguments.getAnnotationProcessors()) {
             fieldAnnotations .addAll(processor.getFieldAnnotations());
@@ -62,10 +59,6 @@ public class DefaultLifecycleMethodsFactory implements LifecycleMethodsFactory {
         for ( Field field : getDeclardFields(clazz) ) {
             if ( field.isSynthetic() ) {
                 continue;
-            }
-
-            if ( !methods.hasValidations ) {
-                methods.hasValidations = checkForValidations(field);
             }
 
             for ( Class<? extends Annotation> annotationClass : fieldAnnotations ) {
@@ -130,15 +123,6 @@ public class DefaultLifecycleMethodsFactory implements LifecycleMethodsFactory {
 
             handleReflectionError(clazz, e.getCause());
         }
-    }
-
-    private boolean checkForValidations(Field field)  {
-        for ( Annotation annotation : field.getDeclaredAnnotations() ) {
-            if ( annotation.annotationType().isAnnotationPresent(Constraint.class) ) {
-                return true;
-            }
-        }
-        return false;
     }
 
     private boolean processField(Field field, Class<? extends Annotation> annotationClass, Multimap<Class<? extends Annotation>, String> usedNames) {

@@ -1,16 +1,5 @@
 package com.netflix.governator.guice;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
-import java.util.concurrent.atomic.AtomicInteger;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.testng.Assert;
-import org.testng.annotations.Test;
-
 import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -18,6 +7,16 @@ import com.google.inject.Key;
 import com.google.inject.name.Names;
 import com.netflix.governator.annotations.Modules;
 import com.netflix.governator.guice.annotations.Bootstrap;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class TestBootstrap {
     private static final Logger LOG = LoggerFactory.getLogger(TestBootstrap.class);

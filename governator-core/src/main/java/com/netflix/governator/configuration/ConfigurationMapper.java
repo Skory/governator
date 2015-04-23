@@ -15,8 +15,8 @@ import com.netflix.governator.lifecycle.LifecycleMethods;
 @ImplementedBy(DefaultConfigurationMapper.class)
 public interface ConfigurationMapper {
     void mapConfiguration(
-            ConfigurationProvider configurationProvider, 
-            ConfigurationDocumentation configurationDocumentation, 
-            Object obj, 
+            ConfigurationProvider configurationProvider,
+            ConfigurationDocumentation configurationDocumentation,
+            Object obj,
             LifecycleMethods methods) throws Exception;
 }

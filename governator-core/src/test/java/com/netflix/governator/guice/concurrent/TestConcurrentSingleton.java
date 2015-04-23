@@ -1,21 +1,5 @@
 package com.netflix.governator.guice.concurrent;
 
-import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
-
-import javax.annotation.PostConstruct;
-import javax.inject.Inject;
-import javax.inject.Provider;
-import javax.inject.Singleton;
-
-import junit.framework.Assert;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.testng.annotations.Test;
-
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.inject.AbstractModule;
@@ -29,6 +13,19 @@ import com.netflix.governator.guice.LifecycleInjectorMode;
 import com.netflix.governator.guice.actions.BindingReport;
 import com.netflix.governator.guice.lazy.FineGrainedLazySingleton;
 import com.netflix.governator.lifecycle.LoggingLifecycleListener;
+import junit.framework.Assert;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.testng.annotations.Test;
+
+import javax.annotation.PostConstruct;
+import javax.inject.Inject;
+import javax.inject.Provider;
+import javax.inject.Singleton;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class TestConcurrentSingleton {
     private static Logger LOG = LoggerFactory.getLogger(TestConcurrentSingleton.class);
@@ -40,7 +37,7 @@ public class TestConcurrentSingleton {
     @FineGrainedLazySingleton
     public static class Parent implements IParent {
         @Inject
-        Parent(@NonConcurrent NonConcurrentSingleton nonConcurrent, 
+        Parent(@NonConcurrent NonConcurrentSingleton nonConcurrent,
                 SlowChild1 child1, 
                 SlowChild2 child2, 
                 Provider<SlowChild3> child3, 

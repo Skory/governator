@@ -19,6 +19,7 @@ package com.netflix.governator.lifecycle.warmup;
 import com.google.common.collect.Sets;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
 import java.util.Set;
 
 public class TestDAGManager
@@ -26,14 +27,14 @@ public class TestDAGManager
     @Test
     public void     testSingleRoot()
     {
-        DAGManager      manager = new DAGManager();
+        DAGManager manager = new DAGManager();
         manager.addDependency("A", "B");
         manager.addDependency("A", "C");
 
-        DependencyNode  root = manager.generateTree();
+        DependencyNode root = manager.generateTree();
         Assert.assertEquals(root.getChildren().size(), 1);
 
-        DependencyNode  aNode = root.getChildren().get(0);
+        DependencyNode aNode = root.getChildren().get(0);
         Assert.assertEquals(aNode.getKey(), "A");
         Assert.assertEquals(aNode.getChildren().size(), 2);
 
@@ -46,15 +47,15 @@ public class TestDAGManager
     @Test
     public void     testSingleRootDepsBothDirections()
     {
-        DAGManager      manager = new DAGManager();
+        DAGManager manager = new DAGManager();
         manager.addDependency("A", "B");
         manager.addDependency("A", "C");
         manager.addDependency("B", "C");
 
-        DependencyNode  root = manager.generateTree();
+        DependencyNode root = manager.generateTree();
         Assert.assertEquals(root.getChildren().size(), 1);
 
-        DependencyNode  aNode = root.getChildren().get(0);
+        DependencyNode aNode = root.getChildren().get(0);
         Assert.assertEquals(aNode.getKey(), "A");
         Assert.assertEquals(aNode.getChildren().size(), 2);
         Assert.assertEquals(aNode.getChildren().get(0).getKey(), "B");
@@ -64,11 +65,11 @@ public class TestDAGManager
     @Test
     public void     testMultiRoots()
     {
-        DAGManager      manager = new DAGManager();
+        DAGManager manager = new DAGManager();
         manager.addDependency("A", "C");
         manager.addDependency("B", "C");
 
-        DependencyNode  root = manager.generateTree();
+        DependencyNode root = manager.generateTree();
         Assert.assertEquals(root.getChildren().size(), 2);
 
         Set<Object>     set = Sets.newHashSet();
@@ -86,12 +87,12 @@ public class TestDAGManager
     @Test
     public void     testMultiRootsDepsBothDirections()
     {
-        DAGManager      manager = new DAGManager();
+        DAGManager manager = new DAGManager();
         manager.addDependency("A", "C");
         manager.addDependency("C", "D");
         manager.addDependency("B", "D");
 
-        DependencyNode  root = manager.generateTree();
+        DependencyNode root = manager.generateTree();
         Assert.assertEquals(root.getChildren().size(), 2);
 
         Set<Object>     set = Sets.newHashSet();

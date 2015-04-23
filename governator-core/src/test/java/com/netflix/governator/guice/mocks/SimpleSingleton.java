@@ -18,6 +18,7 @@ package com.netflix.governator.guice.mocks;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import java.util.concurrent.atomic.AtomicInteger;

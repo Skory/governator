@@ -16,19 +16,15 @@
 
 package com.netflix.governator.guice.lazy;
 
-import com.google.inject.AbstractModule;
-import com.google.inject.Guice;
-import com.google.inject.Inject;
-import com.google.inject.Injector;
-import com.google.inject.Provider;
+import com.google.inject.*;
 import com.netflix.governator.LifecycleInjectorBuilderProvider;
-import com.netflix.governator.guice.LifecycleInjector;
 import com.netflix.governator.guice.LifecycleInjectorBuilder;
 import com.netflix.governator.guice.mocks.AnnotatedFineGrainedLazySingletonObject;
 import com.netflix.governator.guice.mocks.LazySingletonObject;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
 import java.util.concurrent.Callable;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executors;

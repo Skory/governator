@@ -12,6 +12,7 @@ import com.netflix.governator.autobindmultiple.generic.BaseForGenericMocks;
 import com.netflix.governator.guice.LifecycleInjectorBuilder;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
 import java.util.Set;
 
 public class TestAutoBindMultiple extends LifecycleInjectorBuilderProvider

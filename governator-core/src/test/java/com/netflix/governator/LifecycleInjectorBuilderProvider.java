@@ -16,9 +16,8 @@
 
 package com.netflix.governator;
 
-import org.testng.annotations.DataProvider;
-
 import com.netflix.governator.guice.LifecycleInjector;
+import org.testng.annotations.DataProvider;
 
 public class LifecycleInjectorBuilderProvider
 {

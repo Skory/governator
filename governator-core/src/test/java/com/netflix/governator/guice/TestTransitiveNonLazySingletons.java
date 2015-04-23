@@ -1,22 +1,15 @@
 package com.netflix.governator.guice;
 
-import java.lang.reflect.Method;
-import java.util.concurrent.atomic.AtomicLong;
-
-import javax.inject.Singleton;
-
+import com.google.inject.*;
+import com.netflix.governator.guice.actions.BindingReport;
+import com.netflix.governator.guice.actions.CreateAllBoundSingletons;
 import junit.framework.Assert;
-
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.google.inject.AbstractModule;
-import com.google.inject.Inject;
-import com.google.inject.Injector;
-import com.google.inject.Provider;
-import com.google.inject.Stage;
-import com.netflix.governator.guice.actions.BindingReport;
-import com.netflix.governator.guice.actions.CreateAllBoundSingletons;
+import javax.inject.Singleton;
+import java.lang.reflect.Method;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class TestTransitiveNonLazySingletons {
     

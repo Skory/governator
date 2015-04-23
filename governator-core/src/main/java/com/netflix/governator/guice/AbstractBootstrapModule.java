@@ -1,20 +1,15 @@
 package com.netflix.governator.guice;
 
-import java.util.Collection;
-
 import com.google.common.collect.Lists;
-import com.google.inject.Key;
-import com.google.inject.MembersInjector;
-import com.google.inject.Module;
-import com.google.inject.Provider;
-import com.google.inject.Stage;
-import com.google.inject.TypeLiteral;
+import com.google.inject.*;
 import com.google.inject.binder.LinkedBindingBuilder;
 import com.google.inject.multibindings.Multibinder;
 import com.google.inject.spi.Message;
 import com.netflix.governator.configuration.ConfigurationProvider;
 import com.netflix.governator.lifecycle.LifecycleListener;
 import com.netflix.governator.lifecycle.ResourceLocator;
+
+import java.util.Collection;
 
 public abstract class AbstractBootstrapModule implements BootstrapModule {
 

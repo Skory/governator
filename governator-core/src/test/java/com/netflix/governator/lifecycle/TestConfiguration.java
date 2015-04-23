@@ -16,25 +16,16 @@
 
 package com.netflix.governator.lifecycle;
 
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
-
-import org.testng.Assert;
-import org.testng.annotations.Test;
-
 import com.netflix.governator.configuration.CompositeConfigurationProvider;
 import com.netflix.governator.configuration.ConfigurationProvider;
 import com.netflix.governator.configuration.PropertiesConfigurationProvider;
 import com.netflix.governator.guice.AbstractBootstrapModule;
 import com.netflix.governator.guice.LifecycleInjector;
-import com.netflix.governator.lifecycle.mocks.ObjectWithConfig;
-import com.netflix.governator.lifecycle.mocks.ObjectWithConfigVariable;
-import com.netflix.governator.lifecycle.mocks.ObjectWithIgnoreTypeMismatchConfig;
-import com.netflix.governator.lifecycle.mocks.PreConfigurationChange;
-import com.netflix.governator.lifecycle.mocks.SubclassedObjectWithConfig;
+import com.netflix.governator.lifecycle.mocks.*;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+import java.util.*;
 
 public class TestConfiguration
 {
@@ -64,7 +55,7 @@ public class TestConfiguration
             })
             .build();
         
-        LifecycleManager            manager = injector.getLifecycleManager();
+        LifecycleManager manager = injector.getLifecycleManager();
         PreConfigurationChange      test = injector.getInjector().getInstance(PreConfigurationChange.class);
         manager.start();
 
@@ -96,7 +87,7 @@ public class TestConfiguration
                 })
                 .build();
         
-        LifecycleManager            manager = injector.getLifecycleManager();
+        LifecycleManager manager = injector.getLifecycleManager();
         manager.start();
         
         SubclassedObjectWithConfig  obj = injector.getInjector().getInstance(SubclassedObjectWithConfig.class);
@@ -136,7 +127,7 @@ public class TestConfiguration
                 })
                 .build();
         
-        LifecycleManager            manager = injector.getLifecycleManager();
+        LifecycleManager manager = injector.getLifecycleManager();
         manager.start();
 
         ObjectWithConfig    obj = injector.getInjector().getInstance(ObjectWithConfig.class);
@@ -174,7 +165,7 @@ public class TestConfiguration
                 })
                 .build();
         
-        LifecycleManager            manager = injector.getLifecycleManager();
+        LifecycleManager manager = injector.getLifecycleManager();
         manager.start();
 
         ObjectWithConfigVariable    obj = new ObjectWithConfigVariable("test");
